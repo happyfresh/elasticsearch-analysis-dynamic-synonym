@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.synonym.SynonymMap;
+import org.elasticsearch.common.logging.DeprecationCategory;
 import org.elasticsearch.common.logging.DeprecationLogger;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.env.Environment;
@@ -35,7 +36,7 @@ public class DynamicSynonymTokenFilterFactory extends
         AbstractTokenFilterFactory {
 
     private static final DeprecationLogger DEPRECATION_LOGGER
-            = new DeprecationLogger(LogManager.getLogger(DynamicSynonymTokenFilterFactory.class));
+            = DeprecationLogger.getLogger(DynamicSynonymTokenFilterFactory.class);
     private static Logger logger = LogManager.getLogger("dynamic-synonym");
 
     /**
@@ -73,7 +74,7 @@ public class DynamicSynonymTokenFilterFactory extends
                     "dynamic synonym requires `synonyms_path` to be configured");
         }
         if (settings.get("ignore_case") != null) {
-            DEPRECATION_LOGGER.deprecated(
+            DEPRECATION_LOGGER.deprecate(DeprecationCategory.ANALYSIS, "dynamic_synonym",
                 "The ignore_case option on the synonym_graph filter is deprecated. " +
                     "Instead, insert a lowercase filter in the filter chain before the synonym_graph filter.");
         }

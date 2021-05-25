@@ -69,7 +69,6 @@ master| 7.x -> master
 
 `format`: Synonym file format, default: `''`, *optional*. For WordNet structure this can be set to `'wordnet'`
 
-
 ## Update mechanism
 
 * Local files: Determined by modification time of the file, if it has changed the synonyms wil
